@@ -1,3 +1,4 @@
+﻿using BetterChatBox.Chat;
 using BetterChatBox.Config;
 using BetterChatBox.Util;
 using Dalamud.Game.Command;
@@ -10,6 +11,8 @@ namespace BetterChatBox {
         public DalamudPluginInterface pluginInterface { get; }
         
         public BCBConfig config { get; }
+        
+        public ChatHandler chatHandler { get; }
 
         public BetterChatBox(DalamudPluginInterface pluginInterface) {
             pluginInterface.Create<Services>();
@@ -24,6 +27,8 @@ namespace BetterChatBox {
             Services.Commands.AddHandler(Constants.PLUGIN_COMMAND, new CommandInfo(handlePluginCommand) {
                 HelpMessage = ""
             });
+
+            chatHandler = new ChatHandler(this);
         }
 
         private void handlePluginCommand(string command, string args) {
@@ -32,6 +37,7 @@ namespace BetterChatBox {
         
         public void Dispose() {
             Services.Commands.RemoveHandler(Constants.PLUGIN_COMMAND);
+            chatHandler.Dispose();
         }
     }
 }
