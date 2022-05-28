@@ -33,6 +33,11 @@ namespace BetterChatBox {
 
         private void handlePluginCommand(string command, string args) {
             //TODO: Commands
+            var splitArgs = args.Split(" ");
+            if (splitArgs.Length < 1) chatHandler.toggleChatBox();
+            else {
+                //TODO: handle args
+            }
         }
         
         public void Dispose() {

@@ -27,6 +27,13 @@ public class ChatHandler : IDisposable {
         });
     }
 
+    public void toggleChatBox(bool show) {
+        chatBox.drawChatBox = show;
+    }
+
+    public void toggleChatBox() =>
+        toggleChatBox(true);
+
     public void Dispose() {
         chatBox.Dispose();
         Services.Chat.ChatMessageHandled -= handleChat;
