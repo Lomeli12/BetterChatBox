@@ -21,13 +21,18 @@ namespace BetterChatBox.Chat.UI {
         }
 
         private void drawBaseChatBox() {
+            //TODO: Use something other than ImGUI?
             ImGui.SetNextWindowSize(new Vector2(300, 300), ImGuiCond.FirstUseEver );
             ImGui.Begin("", ref drawChatBox);
             
             //TODO: Draw tabs
             ImGui.BeginTabBar("Chats");
-            
-            
+
+            var showAddTab = true;
+            if (ImGui.BeginTabItem("+", ref showAddTab, ImGuiTabItemFlags.Trailing)) {
+                
+                ImGui.EndTabItem();
+            }
             ImGui.EndTabBar();
             
             ImGui.End();
