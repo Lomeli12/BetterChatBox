@@ -1,0 +1,16 @@
+﻿{
+  "Author": "Lomeli",
+  "Name": "Better Chat Box",
+  "Punchline": "A simple chat box replacement for FFXIV",
+  "Description": "A simple chat box replacement for FFXIV. Add as many tabs as you want!",
+  "InternalName": "BetterChatBox",
+  "ApplicableVersion": "any",
+  "Tags": [
+    "better",
+    "chat",
+    "box",
+    "replacement",
+    "more",
+    "tabs"
+  ]
+}
