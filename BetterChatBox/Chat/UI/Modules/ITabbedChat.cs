@@ -9,4 +9,6 @@ public interface ITabbedChat : IDisposable {
     bool filteredChat { get; }
     
     XivChatType[] chatTypes { get; }
+
+    void handleChat(ChatPacket cptx);
 }

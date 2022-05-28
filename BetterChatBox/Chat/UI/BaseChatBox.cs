@@ -6,9 +6,10 @@ using ImGuiNET;
 
 namespace BetterChatBox.Chat.UI {
     public class BaseChatBox : IDisposable {
-        public BetterChatBox plugin { get; private set; }
+        public BetterChatBox plugin { get; }
 
-        public List<ITabbedChat> tabbedChats = new List<ITabbedChat>();
+        public List<ITabbedChat> tabbedChats = new ();
+        public int currentTab = 0;
 
         public bool drawChatBox;
 
@@ -30,6 +31,12 @@ namespace BetterChatBox.Chat.UI {
             ImGui.EndTabBar();
             
             ImGui.End();
+        }
+
+        public void handleChat(ChatPacket cptx) {
+            if (tabbedChats.Count < 1) return;
+            foreach (var tab in tabbedChats)
+                tab.handleChat(cptx);
         }
 
         private void draw() {

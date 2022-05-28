@@ -7,24 +7,28 @@ using Dalamud.Game.Text.SeStringHandling;
 namespace BetterChatBox.Chat;
 
 public class ChatHandler : IDisposable {
-    public BetterChatBox plugin { get; private set; }
+    public BetterChatBox plugin { get; }
     
-    public BaseChatBox chatBox { get; private set; }
+    public BaseChatBox chatBox { get; }
 
     public ChatHandler(BetterChatBox plugin) {
         this.plugin = plugin;
         chatBox = new BaseChatBox(plugin);
 
-        Services.Chat.CheckMessageHandled += handleChat;
+        Services.Chat.ChatMessageHandled += handleChat;
     }
 
-    private void handleChat(XivChatType chatType, uint senderID, ref SeString sender, ref SeString msg,
-        ref bool isHandled) {
-        //TODO: Process chat based on current tab
+    private void handleChat(XivChatType chatType, uint senderID, SeString sender, SeString msg) {
+        chatBox.handleChat(new ChatPacket {
+            chatType = chatType,
+            senderID = senderID,
+            sender = sender,
+            msg = msg
+        });
     }
 
     public void Dispose() {
         chatBox.Dispose();
-        Services.Chat.CheckMessageHandled -= handleChat;
+        Services.Chat.ChatMessageHandled -= handleChat;
     }
 }
